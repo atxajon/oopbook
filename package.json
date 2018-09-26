@@ -1,0 +1,23 @@
+{
+  "name": "bookapp",
+  "version": "1.0.0",
+  "description": "OOP Book List Project with ES6 vanilla js",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel src/index.html --out-dir local",
+    "build": "parcel build src/index.html --out-dir docs --public-url ./"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atxajon/oopbook.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/atxajon/oopbook/issues"
+  },
+  "homepage": "https://github.com/atxajon/oopbook#readme",
+  "dependencies": {
+    "parcel-bundler": "^1.10.0"
+  }
+}

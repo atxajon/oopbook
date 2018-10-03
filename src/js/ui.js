@@ -3,11 +3,11 @@ export default class UI {
   }
 
   displayMessage(mssg, className) {
-    const container = document.getElementsByClassName('container');
+    const bookEntry = document.getElementById('book-entry');
     const divAlert = document.createElement('div');
     divAlert.setAttribute('class', className);
     divAlert.textContent = mssg;
-    container[0].insertBefore(divAlert, container[0].firstChild);
+    bookEntry.insertBefore(divAlert, bookEntry.firstChild);
 
     // Remove message after 3 seconds.
     const alertInterval = setInterval(function() {

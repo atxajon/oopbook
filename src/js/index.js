@@ -25,7 +25,7 @@ const formSubmit = (e) => {
 }
 
 const insertDB = (book, uid) => {
-  const ref = firebaseApp.db.ref('books/' + uid);
+  const ref = firebaseApp.database().ref('books/' + uid);
   ref.push().set(book)
         .then(function(snapshot) {
           const ui = new UI();
@@ -39,7 +39,7 @@ const insertDB = (book, uid) => {
 }
 
 const getDBbooks = (uid) => {
-  let fref = firebaseApp.db.ref().child('books/' + uid);
+  let fref = firebaseApp.database().ref().child('books/' + uid);
   fref.on('value', function(datasnapshot) {
     document.getElementById('db-book-list').innerText = datasnapshot.val();
     console.log(datasnapshot.val());

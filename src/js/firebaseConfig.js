@@ -8,11 +8,6 @@ const config = {
   storageBucket: "book-2aebd.appspot.com",
   messagingSenderId: "669158963997"
 };
-firebase.initializeApp(config);
-
-
-let firebaseApp = {
-  db: firebase.database(),
-}
+const firebaseApp = firebase.initializeApp(config);
 
 export default firebaseApp;

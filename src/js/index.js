@@ -5,7 +5,7 @@ import firebaseApp from './firebaseConfig';
 document.addEventListener('DOMContentLoaded', function(e) {
   const form = document.getElementById('book-form');
   form.addEventListener('submit', formSubmit);
-  const dbbooks = getDBbooks(2); // get all books for user 2.
+  const dbbooks = getFirebaseBooks(2); // get all books for user 2.
 })
 
 const formSubmit = (e) => {
@@ -14,7 +14,7 @@ const formSubmit = (e) => {
   const isbn = document.getElementById('isbn');
   const uid = document.getElementById('uid');
   const book = new Book(title.value, author.value, isbn.value);
-  insertDB(book, uid.value);
+  saveToFirebase(book, uid.value);
 
   const deleteLink = document.querySelector('.delete-book');
   if (deleteLink) {
@@ -24,9 +24,9 @@ const formSubmit = (e) => {
   e.preventDefault();
 }
 
-const insertDB = (book, uid) => {
+const saveToFirebase = (book, uid) => {
   const ref = firebaseApp.database().ref('books/' + uid);
-  ref.push().set(book)
+  ref.push(book)
         .then(function(snapshot) {
           const ui = new UI();
           ui.displayMessage('Book added', 'alert success');
@@ -36,13 +36,14 @@ const insertDB = (book, uid) => {
             console.log('error' + error);
             error(); // some error method
         });
+
 }
 
-const getDBbooks = (uid) => {
-  let fref = firebaseApp.database().ref().child('books/' + uid);
-  fref.on('value', function(datasnapshot) {
-    document.getElementById('db-book-list').innerText = datasnapshot.val();
-    console.log(datasnapshot.val());
+const getFirebaseBooks = (uid) => {
+  const ref = firebaseApp.database().ref().child('books/' + uid);
+  ref.on('value', function(data) {
+    const ui = new UI();
+    ui.displayBooks(data.val());
   })
   
 

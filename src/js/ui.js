@@ -29,6 +29,20 @@ export default class UI {
     bookList.appendChild(tr);
   }
 
+  // Given a firebase dataSnapshot object that contains all found results, iterate through and render them.
+  displayBooks(firebaseObj) {
+    // Iterate through object properties. 
+    for (let index in firebaseObj) {
+      const bookList = document.getElementById('db-book-list');
+      const divBook = document.createElement('div');
+      divBook.setAttribute('class', 'four columns');
+      divBook.innerHTML = `<h2>${firebaseObj[index]._title}</h2><p>Author: ${firebaseObj[index]._author}</p>`;
+      bookList.appendChild(divBook);
+    }
+    document.getElementById('loader').remove();
+
+  }
+
   deleteBook(bookId) {
     document.getElementById(bookId).remove();
   }
